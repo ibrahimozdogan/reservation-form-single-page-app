@@ -49,6 +49,7 @@ function ReservationForm() {
 
   return (
     <StyledForm
+      data-testid="reservation-form"
       onSubmit={async (event) => {
         event.preventDefault();
         setIsLoading(true);
@@ -69,6 +70,7 @@ function ReservationForm() {
       >
         <Cell>
           <DateRangePicker
+            data-testid="date-range-picker"
             onChange={(selectedDates) => {
               const dates = selectedDates
                 ?.map((date) => date.format('YYYY-MM-DD')) || [];
@@ -82,6 +84,7 @@ function ReservationForm() {
         </Cell>
         <Cell>
           <TextInput
+            data-testid="number-of-guests"
             onChange={(numberOfGuests) => {
               setToPayload('numberOfGuests', Number(numberOfGuests));
             }}
@@ -94,6 +97,7 @@ function ReservationForm() {
         </Cell>
         <Cell>
           <TextInput
+            data-testid="first-name"
             onChange={(firstName) => {
               setToPayload('firstName', firstName);
             }}
@@ -103,6 +107,7 @@ function ReservationForm() {
         </Cell>
         <Cell>
           <TextInput
+            data-testid="last-name"
             onChange={(lastName) => {
               setToPayload('lastName', lastName);
             }}
@@ -112,6 +117,7 @@ function ReservationForm() {
         </Cell>
         <Cell>
           <TextInput
+            data-testid="billing-address"
             onChange={(billingAddress) => {
               setToPayload('billingAddress', billingAddress);
             }}
@@ -121,6 +127,7 @@ function ReservationForm() {
         </Cell>
         <Cell>
           <Picker
+            data-testid="billing-country"
             onChange={(billingCountry) => {
               setToPayload('billingCountry', billingCountry);
             }}
@@ -132,6 +139,7 @@ function ReservationForm() {
         </Cell>
         <Cell>
           <TextInput
+            data-testid="postal-code"
             onChange={(postalCode) => {
               setToPayload('postalCode', postalCode);
             }}
@@ -141,6 +149,7 @@ function ReservationForm() {
         </Cell>
         <Cell>
           <TextInput
+            data-testid="city"
             onChange={(city) => {
               setToPayload('city', city);
             }}
@@ -150,6 +159,7 @@ function ReservationForm() {
         </Cell>
         <Cell>
           <TextInput
+            data-testid="email"
             onChange={(email) => {
               setToPayload('email', email);
             }}
@@ -161,6 +171,7 @@ function ReservationForm() {
         </Cell>
         <Cell>
           <TextInput
+            data-testid="phone-number"
             onChange={(phoneNumber) => {
               setToPayload('phoneNumber', phoneNumber);
             }}
@@ -174,7 +185,7 @@ function ReservationForm() {
           {
             isLoading
               ? <Loading type="spinningBubbles" />
-              : <Button onClick={() => {}}>{translate('BOOK_NOW')}</Button>
+              : <Button data-testid="submit">{translate('BOOK_NOW')}</Button>
           }
         </Cell>
       </Grid>

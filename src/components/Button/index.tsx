@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 interface ButtonProps {
     children: ReactNode
-    onClick: ()=> void
+    onClick?: ()=> void
 }
 
 const StyledButton = styled.button`
@@ -22,7 +22,7 @@ const StyledButton = styled.button`
   }
 `;
 
-function Button({ children, onClick }: ButtonProps) {
+function Button({ children, onClick = () => {} }: ButtonProps) {
   return (
     <StyledButton
       type="submit"
