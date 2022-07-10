@@ -1,0 +1,9 @@
+version: '3.7'
+services:
+  application:
+    container_name: reservation-form-react-application
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./src:/reservation-form-react-application/src
