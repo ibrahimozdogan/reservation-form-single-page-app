@@ -16,6 +16,10 @@ const translations = {
       PHONE_NUMBER_VALIDATION_MESSAGE: 'Phone number should be 11 digits without having any space. E.g 15712345678',
       RESERVATION_FORM_TITLE: 'Book your suite at limehome',
       SELECT_COUNTRY: 'Select country',
+      VALIDATION_ERROR: 'Validation error occurred, please input valid information.',
+      RESERVATION_EXISTS: 'There is already one registered reservation for you between these days.',
+      SUCCESS: 'Your reservation has been successfully registered.',
+      SOMETHING_WENT_WRONG: 'Something went wrong. Please try again later.',
     },
   },
 };

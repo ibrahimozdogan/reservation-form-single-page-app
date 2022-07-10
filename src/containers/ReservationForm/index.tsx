@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
+  Alert,
   Button,
   TextInput,
   Grid,
@@ -7,11 +8,15 @@ import {
   Picker,
   DateRangePicker,
   Title,
-  Divider,
+  Divider, Loading,
 } from '@components';
 import { translate } from '@utils';
 import { countries } from '@config';
+import { ReservationApi } from '@api';
 import styled from 'styled-components';
+import { ReservationPayload } from '@types';
+
+const { useAlert } = Alert;
 
 const StyledForm = styled.form`
   max-width: 1000px;
@@ -19,20 +24,39 @@ const StyledForm = styled.form`
   margin: 10px auto;
 `;
 
-const payload: Record<string, any> = {
-  selectedDates: null,
+const payload: ReservationPayload = {
+  billingAddress: '',
+  billingCountry: '',
+  checkInDate: '',
+  checkOutDate: '',
+  city: '',
+  email: '',
+  firstName: '',
+  lastName: '',
+  phoneNumber: '',
+  postalCode: '',
+  numberOfGuests: 0,
 };
 
-const setToPayload = (key: string, value: string|string[]) => {
+const setToPayload = (key: keyof ReservationPayload, value: string|number) => {
+  // @ts-ignore
   payload[key] = value;
-  console.log(payload);
 };
 
 function ReservationForm() {
+  const [isLoading, setIsLoading] = useState(false);
+  const alert = useAlert();
+
   return (
     <StyledForm
-      onSubmit={(event) => {
+      onSubmit={async (event) => {
         event.preventDefault();
+        setIsLoading(true);
+
+        const response = await ReservationApi.saveReservation(payload);
+        alert.show(translate(response.data.message));
+
+        setIsLoading(false);
       }}
     >
       <Title text={translate('RESERVATION_FORM_TITLE')} size="h1" />
@@ -46,10 +70,11 @@ function ReservationForm() {
         <Cell>
           <DateRangePicker
             onChange={(selectedDates) => {
-              setToPayload(
-                'selectedDates',
-                selectedDates?.map((date) => date.format('YYYY-MM-DD')) || [],
-              );
+              const dates = selectedDates
+                ?.map((date) => date.format('YYYY-MM-DD')) || [];
+
+              setToPayload('checkInDate', dates[0]);
+              setToPayload('checkOutDate', dates[1]);
             }}
             label={translate('CHECK_IN_OUT_DATES')}
             required
@@ -58,10 +83,12 @@ function ReservationForm() {
         <Cell>
           <TextInput
             onChange={(numberOfGuests) => {
-              setToPayload('numberOfGuests', numberOfGuests);
+              setToPayload('numberOfGuests', Number(numberOfGuests));
             }}
             label={translate('NUMBER_OF_GUESTS')}
             type="number"
+            min={1}
+            max={20}
             required
           />
         </Cell>
@@ -144,7 +171,11 @@ function ReservationForm() {
           />
         </Cell>
         <Cell>
-          <Button onClick={() => {}}>{translate('BOOK_NOW')}</Button>
+          {
+            isLoading
+              ? <Loading type="spinningBubbles" />
+              : <Button onClick={() => {}}>{translate('BOOK_NOW')}</Button>
+          }
         </Cell>
       </Grid>
     </StyledForm>

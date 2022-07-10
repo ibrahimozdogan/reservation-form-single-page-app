@@ -4,10 +4,12 @@ import { debounce } from '@utils';
 
 interface TextInputProps {
   label: string
-  onChange: (value: string, isValid: boolean)=> void
+  onChange: (value: string|number, isValid: boolean)=> void
   type?: 'number' | 'text' | 'email' | 'tel'
   required?: boolean
   validationMessage?: string
+  min?: number
+  max?: number
 }
 
 const REGEXES = {
@@ -78,6 +80,8 @@ function TextInput({
   type = 'text',
   required = false,
   validationMessage,
+  min = 0,
+  max = 9999999,
 }: TextInputProps) {
   const _onChange = useCallback(debounce((e: React.ChangeEvent<HTMLInputElement>) => {
     onChange(e.target.value, e.target.validity.valid);
@@ -94,6 +98,8 @@ function TextInput({
           {...(required ? { pattern: REGEXES[type] } : {})}
           required={required}
           title={validationMessage}
+          min={min}
+          max={max}
         />
         <StyledLabel>{label}</StyledLabel>
       </StyledContainer>
