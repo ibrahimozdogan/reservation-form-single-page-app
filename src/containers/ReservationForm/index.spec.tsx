@@ -45,20 +45,6 @@ describe('ReservationForm', () => {
   });
 
   it('should not submit the form when fields are not valid', () => {
-    const payload = {
-      billingAddress: '',
-      billingCountry: '',
-      checkInDate: '',
-      checkOutDate: '',
-      city: '',
-      email: '',
-      firstName: '',
-      lastName: '',
-      phoneNumber: '',
-      postalCode: '',
-      numberOfGuests: 0,
-    };
-
     render(<ReservationForm />);
 
     fireEvent.click(screen.getByTestId('submit'));
