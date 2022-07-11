@@ -1,24 +1,13 @@
 version: 0.2
 
 phases:
-  install:
-    runtime-versions:
-      nodejs: 12
-
-    commands:
-      # install yarn
-      - npm install yarn
-      # install dependencies
-      - yarn
-
   build:
     commands:
-      # run build script
+      - npm install yarn
+      - yarn
       - yarn build
 
 artifacts:
-  # include all files required to run application
-  # we include only the static build files
   files:
     - '**/*'
   base-directory: 'build'
