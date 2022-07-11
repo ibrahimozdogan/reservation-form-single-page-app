@@ -3,9 +3,8 @@ version: 0.2
 phases:
   build:
     commands:
-      - npm install yarn
-      - yarn
-      - yarn build
+      - npm install
+      - npm run build
 
 artifacts:
   files:
