@@ -5,10 +5,7 @@ phases:
     commands:
       - yarn
       - yarn build
-  post_build:
-    commands:
-      - mv build/**/* ./
-      - mv build/* ./
 artifacts:
   files:
-    - 'build/*'
+    - '**/*'
+  base-directory: build
