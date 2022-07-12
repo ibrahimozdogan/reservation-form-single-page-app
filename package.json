@@ -30,7 +30,7 @@
   "scripts": {
     "start": "craco start",
     "test": "craco test",
-    "build": "GENERATE_SOURCEMAP=false craco build"
+    "build": "NODE_ENV=production GENERATE_SOURCEMAP=false craco build"
   },
   "eslintConfig": {
     "extends": [
