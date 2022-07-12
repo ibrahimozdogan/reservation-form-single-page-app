@@ -1,6 +1,7 @@
 # react-form-single-page-app
 
 Demo link: https://reservation-form-demo.s3.eu-central-1.amazonaws.com/index.html
+Technologies: React, Docker, AWS CodePipeline (CI/CD), Typescript, Jest, CssInJs, AWS S3
 
 Pre-Requests
 
