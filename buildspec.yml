@@ -5,10 +5,8 @@ phases:
     commands:
       - yarn
       - yarn build
-  post_build:
-    commands:
-      - mv build/**/* ./
-      - mv build/* ./
+      - aws s3 sync build/ s3://$WEBSITE_S3_BUCKET/
 artifacts:
   files:
     - '**/*'
+  base-directory: build
