@@ -21,7 +21,7 @@ docker-compose up
 ```
 
 ```tip
-You can access the react application via http://localhost:3000,
+You can access the react application via http://localhost:3000
 ```
 
 Any questions : <halilibrahimozdogan2@gmail.com>
