@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CustomDatePicker, { DateObject } from 'react-multi-date-picker';
 import 'react-multi-date-picker/styles/colors/green.css';
 import styled, { css, useTheme } from 'styled-components';
@@ -28,6 +28,7 @@ const StyledContainer = styled.div`
 `;
 
 function DateRangePicker({ onChange, label, required = false }: DatePickerProps) {
+  const [isValid, setIsValid] = useState(false);
   const theme = useTheme();
 
   return (
@@ -35,7 +36,13 @@ function DateRangePicker({ onChange, label, required = false }: DatePickerProps)
       <StyledSpan required={required}>{label}</StyledSpan>
       <CustomDatePicker
         className="green"
-        onChange={onChange}
+        onChange={(dates) => {
+          if ((dates as DateObject[]).length > 1) {
+            setIsValid(true);
+          }
+
+          onChange(dates as DateObject[]);
+        }}
         placeholder={label}
         minDate={new DateObject().toDate()}
         required={required}
@@ -50,6 +57,7 @@ function DateRangePicker({ onChange, label, required = false }: DatePickerProps)
           fontSize: theme.fontSizes.text.large,
           background: 'transparent',
           height: '70px',
+          borderColor: isValid ? theme.colors.secondary : theme.colors.lightGray,
         }}
       />
     </StyledContainer>

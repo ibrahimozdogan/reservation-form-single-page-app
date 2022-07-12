@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import i18next from 'i18next';
 import { theme, translations } from '@config';
@@ -19,6 +19,10 @@ i18next.init({
 });
 
 function App() {
+  useEffect(() => {
+    document.title = 'Reservation Form';
+  }, []);
+
   return (
     <ThemeProvider theme={theme}>
       <AlertProvider template={AlertTemplate} {...alertOptions}>

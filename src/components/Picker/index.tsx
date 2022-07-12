@@ -27,6 +27,10 @@ const StyledSelect = styled.select`
   &:not(:valid) {
     color: gray;
   }
+
+  &:valid {
+    border-color: ${(props) => props.theme.colors.secondary};
+  }
 `;
 
 const StyledSpan = styled.span`
