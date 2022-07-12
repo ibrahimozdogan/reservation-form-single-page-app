@@ -5,7 +5,7 @@ phases:
     commands:
       - yarn
       - yarn build
-      - aws s3 sync build/ s3://$WEBSITE_S3_BUCKET/
+      - aws s3 sync build/ s3://reservation-form-demo/
 artifacts:
   files:
     - '**/*'
